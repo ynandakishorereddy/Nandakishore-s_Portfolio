@@ -9,7 +9,7 @@ import { personalInfo } from '@/data/portfolio-data';
 
 export default function Hero() {
   const containerVariants: Variants = {
-    hidden: { opacity: 1 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
@@ -19,7 +19,7 @@ export default function Hero() {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 1, y: 20 },
+    hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
   };
 
@@ -78,10 +78,10 @@ export default function Hero() {
             <motion.div variants={itemVariants} className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 w-full max-w-lg">
               <div>
                 <div className="text-3xl font-bold text-slate-900 dark:text-white">4+</div>
-                <div className="text-sm font-medium text-slate-500 mt-1">Projects Built</div>
+                <div className="text-sm font-medium text-slate-500 mt-1">Production Apps</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-slate-900 dark:text-white">6</div>
+                <div className="text-3xl font-bold text-slate-900 dark:text-white">12</div>
                 <div className="text-sm font-medium text-slate-500 mt-1">Certifications</div>
               </div>
               <div>
@@ -93,7 +93,7 @@ export default function Hero() {
 
           {/* Right Content - Profile Image */}
           <motion.div
-            initial={{ opacity: 1, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
             className="hidden lg:flex justify-center relative"
@@ -120,7 +120,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        initial={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-slate-400 animate-bounce"

@@ -4,7 +4,17 @@ import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { projects } from '@/data/portfolio-data';
 import { FadeIn } from '@/components/ui/motion-wrapper';
-import { ExternalLink, ArrowRight, ArrowLeft, CheckCircle2, AlertCircle, Calendar } from 'lucide-react';
+import {
+  ExternalLink,
+  ArrowRight,
+  ArrowLeft,
+  CheckCircle2,
+  AlertCircle,
+  Calendar,
+  TrendingUp,
+  Layers,
+  Wrench,
+} from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 
 export async function generateStaticParams() {
@@ -49,11 +59,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Breadcrumb */}
         <FadeIn>
-          <nav className="flex items-center gap-2 text-sm text-slate-500 mb-8">
+          <nav className="flex items-center gap-2 text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
-            <span>/</span>
+            <span aria-hidden="true">/</span>
             <Link href="/projects" className="hover:text-blue-600 transition-colors">Projects</Link>
-            <span>/</span>
+            <span aria-hidden="true">/</span>
             <span className="text-slate-900 dark:text-slate-200 font-medium">{project.title}</span>
           </nav>
         </FadeIn>
@@ -65,7 +75,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               <span className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full border border-blue-100 dark:border-blue-800">
                 {project.category}
               </span>
-              <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-green-600 bg-green-50 dark:bg-green-900/30 px-3 py-1 rounded-full border border-green-100 dark:border-green-800">
+              <span className={`flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full border ${
+                project.status === 'Completed'
+                  ? 'text-green-600 bg-green-50 dark:bg-green-900/30 border-green-100 dark:border-green-800'
+                  : project.status === 'Maintained'
+                    ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/30 border-blue-100 dark:border-blue-800'
+                    : 'text-amber-600 bg-amber-50 dark:bg-amber-900/30 border-amber-100 dark:border-amber-800'
+              }`}>
                 <CheckCircle2 size={12} />
                 {project.status}
               </span>
@@ -85,13 +101,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
             <div className="flex flex-wrap gap-4">
               {project.liveDemo && (
-                <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-colors shadow-sm shadow-blue-500/20">
+                <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-colors shadow-sm shadow-blue-500/20" aria-label={`Live demo of ${project.title}`}>
                   <ExternalLink size={18} />
                   Live Demo
                 </a>
               )}
               {project.github && (
-                <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 dark:text-slate-900 text-white px-6 py-3 rounded-xl font-medium transition-colors">
+                <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 dark:text-slate-900 text-white px-6 py-3 rounded-xl font-medium transition-colors" aria-label={`GitHub repository for ${project.title}`}>
                   <GithubIcon size={18} />
                   View Source
                 </a>
@@ -136,9 +152,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           </FadeIn>
         </div>
 
-        {/* Tech Stack */}
+        {/* Tech Stack & Architecture */}
         <FadeIn delay={0.5} className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Tech Stack & Architecture</h2>
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+            <Layers size={24} className="text-blue-500" />
+            System Architecture & Tech Stack
+          </h2>
           <p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
             {project.architecture}
           </p>
@@ -151,14 +170,17 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           </div>
         </FadeIn>
 
-        {/* Features & Challenges */}
+        {/* Key Features & Engineering Challenges */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           <FadeIn delay={0.6}>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Key Features</h2>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+              <CheckCircle2 size={20} className="text-blue-500" />
+              Key Features
+            </h2>
             <ul className="space-y-4">
               {project.features.map((feature, i) => (
                 <li key={i} className="flex items-start gap-3 text-slate-600 dark:text-slate-400">
-                  <CheckCircle2 size={20} className="text-blue-500 shrink-0 mt-0.5" />
+                  <CheckCircle2 size={18} className="text-blue-500 shrink-0 mt-0.5" />
                   <span className="leading-relaxed">{feature}</span>
                 </li>
               ))}
@@ -166,11 +188,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           </FadeIn>
           
           <FadeIn delay={0.7}>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Technical Challenges</h2>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+              <Wrench size={20} className="text-amber-500" />
+              Engineering Challenges
+            </h2>
             <ul className="space-y-4">
               {project.challenges.map((challenge, i) => (
                 <li key={i} className="flex items-start gap-3 text-slate-600 dark:text-slate-400">
-                  <AlertCircle size={20} className="text-amber-500 shrink-0 mt-0.5" />
+                  <AlertCircle size={18} className="text-amber-500 shrink-0 mt-0.5" />
                   <span className="leading-relaxed">{challenge}</span>
                 </li>
               ))}
@@ -178,9 +203,43 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           </FadeIn>
         </div>
 
+        {/* Measurable Outcomes */}
+        {project.outcomes && project.outcomes.length > 0 && (
+          <FadeIn delay={0.75} className="mb-16">
+            <div className="p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-100 dark:border-blue-900/30">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                <TrendingUp size={22} className="text-blue-600" />
+                Measurable Outcomes
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {project.outcomes.map((outcome, i) => (
+                  <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-blue-100/50 dark:border-blue-900/30">
+                    <CheckCircle2 size={18} className="text-blue-600 shrink-0 mt-0.5" />
+                    <span className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">{outcome}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FadeIn>
+        )}
+
+        {/* Deployment */}
+        {project.deployment && project.deployment.length > 0 && (
+          <FadeIn delay={0.8} className="mb-16">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Deployment</h2>
+            <div className="flex flex-wrap gap-3">
+              {project.deployment.map((env, i) => (
+                <span key={i} className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium">
+                  {env}
+                </span>
+              ))}
+            </div>
+          </FadeIn>
+        )}
+
         {/* Screenshots */}
         {project.screenshots && project.screenshots.length > 0 && (
-          <FadeIn delay={0.8} className="mb-16">
+          <FadeIn delay={0.85} className="mb-16">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">Screenshots</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {project.screenshots.map((screenshot, i) => (

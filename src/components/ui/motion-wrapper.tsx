@@ -13,7 +13,7 @@ interface MotionWrapperProps extends HTMLMotionProps<'div'> {
 export function FadeIn({ children, className, delay = 0, ...props }: MotionWrapperProps) {
   return (
     <motion.div
-      initial={{ opacity: 1, y: 20 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay, ease: 'easeOut' }}
@@ -28,7 +28,7 @@ export function FadeIn({ children, className, delay = 0, ...props }: MotionWrapp
 export function SlideIn({ children, className, delay = 0, ...props }: MotionWrapperProps) {
   return (
     <motion.div
-      initial={{ opacity: 1, x: -30 }}
+      initial={{ opacity: 0, x: -30 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay, ease: 'easeOut' }}
@@ -43,7 +43,7 @@ export function SlideIn({ children, className, delay = 0, ...props }: MotionWrap
 export function ScaleIn({ children, className, delay = 0, ...props }: MotionWrapperProps) {
   return (
     <motion.div
-      initial={{ opacity: 1, scale: 0.95 }}
+      initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay, ease: 'easeOut' }}

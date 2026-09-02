@@ -5,7 +5,7 @@ import Link from 'next/link';
 import SectionHeading from '@/components/ui/section-heading';
 import { FadeIn } from '@/components/ui/motion-wrapper';
 import { projects } from '@/data/portfolio-data';
-import { ExternalLink, ArrowRight, Activity, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, ArrowRight, Activity, CheckCircle2, Layers } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 
 export default function Projects() {
@@ -29,11 +29,17 @@ export default function Projects() {
                     <span className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
                       {project.category}
                     </span>
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
+                    <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                      project.status === 'Completed'
+                        ? 'bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400'
+                        : project.status === 'Maintained'
+                          ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                          : 'bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400'
+                    }`}>
                       {project.status === 'Completed' ? (
-                        <CheckCircle2 size={12} className="text-green-500" />
+                        <CheckCircle2 size={12} />
                       ) : (
-                        <Activity size={12} className="text-blue-500" />
+                        <Activity size={12} />
                       )}
                       {project.status}
                     </div>
@@ -52,12 +58,12 @@ export default function Projects() {
                   
                   <div className="mt-auto pt-4 flex flex-wrap gap-2">
                     {project.techStack.slice(0, 5).map(tech => (
-                      <span key={tech} className="text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium">
+                      <span key={tech} className="text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium border border-slate-200/50 dark:border-slate-700/50">
                         {tech}
                       </span>
                     ))}
                     {project.techStack.length > 5 && (
-                      <span className="text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium">
+                      <span className="text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium border border-slate-200/50 dark:border-slate-700/50">
                         +{project.techStack.length - 5}
                       </span>
                     )}
@@ -67,18 +73,18 @@ export default function Projects() {
                 <div className="px-8 py-5 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900 flex items-center justify-between">
                   <div className="flex gap-4">
                     {project.github && (
-                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" aria-label="GitHub Repository">
+                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" aria-label={`GitHub repository for ${project.title}`}>
                         <GithubIcon size={20} />
                       </a>
                     )}
                     {project.liveDemo && (
-                      <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" aria-label="Live Demo">
+                      <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" aria-label={`Live demo of ${project.title}`}>
                         <ExternalLink size={20} />
                       </a>
                     )}
                   </div>
                   <Link href={`/projects/${project.slug}`} className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
-                    View Details
+                    View Case Study
                     <ArrowRight size={16} />
                   </Link>
                 </div>

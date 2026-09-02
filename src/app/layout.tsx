@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
-import { personalInfo } from "@/data/portfolio-data";
+import { PORTFOLIO_DATA } from "@/lib/portfolio-data";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -16,13 +14,14 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const p = PORTFOLIO_DATA.personal;
+
 export const metadata: Metadata = {
   title: {
     template: "%s | Nandakishore Reddy",
     default: "Nandakishore Reddy | Software Engineer",
   },
-  description:
-    "Software Engineer with experience building production-ready ASP.NET Core, AI-powered full-stack, and cloud-native applications. Skilled in C#, Java, React, Node.js, Azure, and CI/CD.",
+  description: p.bio,
   keywords: [
     "Software Engineer",
     "ASP.NET Core",
@@ -34,24 +33,22 @@ export const metadata: Metadata = {
     "Nandakishore Reddy",
     "Portfolio",
   ],
-  authors: [{ name: "Nandakishore Reddy" }],
-  creator: "Nandakishore Reddy",
+  authors: [{ name: p.shortName }],
+  creator: p.shortName,
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://nandakishore.dev",
-    title: "Nandakishore Reddy | Software Engineer",
-    description:
-      "Software Engineer specializing in ASP.NET Core, full-stack, and AI-integrated applications.",
-    siteName: "Nandakishore Reddy Portfolio",
+    url: p.social.portfolio,
+    title: `${p.shortName} | ${p.headline}`,
+    description: p.bio,
+    siteName: `${p.shortName} Portfolio`,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nandakishore Reddy | Software Engineer",
-    description:
-      "Software Engineer specializing in ASP.NET Core, full-stack, and AI-integrated applications.",
+    title: `${p.shortName} | ${p.headline}`,
+    description: p.bio,
   },
-  metadataBase: new URL("https://nandakishore.dev"),
+  metadataBase: new URL(p.social.portfolio),
 };
 
 const jsonLd = {
@@ -59,12 +56,12 @@ const jsonLd = {
   "@type": "ProfilePage",
   mainEntity: {
     "@type": "Person",
-    name: personalInfo.fullName,
-    jobTitle: personalInfo.title,
-    description: personalInfo.summary,
-    email: `mailto:${personalInfo.email}`,
-    url: "https://nandakishore.dev",
-    sameAs: [personalInfo.github, personalInfo.linkedin],
+    name: p.fullName,
+    jobTitle: p.headline,
+    description: p.bio,
+    email: `mailto:${p.email}`,
+    url: p.social.portfolio,
+    sameAs: [p.social.github, p.social.linkedin],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Kadapa",
@@ -73,7 +70,7 @@ const jsonLd = {
     },
     alumniOf: {
       "@type": "CollegeOrUniversity",
-      name: "Saveetha University (SIMATS)",
+      name: p.education.institution,
     },
     knowsAbout: [
       "ASP.NET Core",
@@ -100,7 +97,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col`}
+        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        style={{ backgroundColor: "var(--c-canvas)", color: "var(--c-ink)" }}
       >
         <script
           type="application/ld+json"
@@ -112,9 +110,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          <div className="flex-1">{children}</div>
-          <Footer />
+          {children}
         </ThemeProvider>
       </body>
     </html>

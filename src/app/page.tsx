@@ -36,36 +36,36 @@ export default function HomePage() {
     <>
       <Navbar onTerminalOpen={() => setTerminalOpen(true)} />
 
-      <main>
+      <main className="bg-slate-50 min-h-screen">
         {/* ═══════ #about — Hero ═══════════════════════════════════════════ */}
-        <section id="about" className="relative min-h-[90vh] flex items-center pt-[88px] overflow-hidden">
+        <section id="about" className="relative min-h-[90vh] flex items-center pt-[88px] overflow-hidden bg-white">
           <div className="absolute inset-0 mesh-glow -z-10" />
 
           <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full py-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               {/* Left */}
               <div className="flex flex-col items-start">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 text-sm font-medium mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 text-sm font-medium mb-6 shadow-sm">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-dot" />
                   {D.personal.availability}
                 </div>
 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-4">
-                  <span className="text-[var(--c-ink)]">{D.personal.fullName.split(' ')[0]} </span>
-                  <span className="text-[var(--c-accent-indigo)]">
+                  <span className="text-slate-900">{D.personal.fullName.split(' ')[0]} </span>
+                  <span className="text-indigo-600">
                     {D.personal.fullName.split(' ').slice(1).join(' ')}
                   </span>
                 </h1>
 
-                <p className="text-xl font-semibold text-[var(--c-accent-indigo)] mb-2">
+                <p className="text-xl font-semibold text-indigo-600 mb-2">
                   {D.personal.headline}
                 </p>
-                <p className="text-sm font-medium text-[var(--c-muted)] mb-6 flex items-center gap-2">
+                <p className="text-sm font-medium text-slate-500 mb-6 flex items-center gap-2">
                   <MapPin size={14} />
                   {D.personal.experience.role} @ {D.personal.experience.company} · {D.personal.location}
                 </p>
 
-                <p className="text-base text-[var(--c-muted)] max-w-lg mb-8 leading-relaxed">
+                <p className="text-base text-slate-600 max-w-lg mb-8 leading-relaxed">
                   {D.personal.bio}
                 </p>
 
@@ -73,7 +73,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap gap-4 items-center mb-10">
                   <a
                     href="#projects"
-                    className="inline-flex items-center gap-2 bg-[var(--c-accent-indigo)] hover:opacity-90 text-white px-6 py-3 rounded-xl font-medium transition-all active:scale-95"
+                    className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm px-6 py-3 rounded-xl font-medium transition-all active:scale-95"
                   >
                     View Projects <ArrowRight size={18} />
                   </a>
@@ -81,26 +81,26 @@ export default function HomePage() {
                     href={D.personal.resumeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 border border-[var(--c-line)] hover:bg-[var(--c-surface)] px-6 py-3 rounded-xl font-medium transition-all active:scale-95"
+                    className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 px-6 py-3 rounded-xl font-medium transition-all active:scale-95 shadow-sm"
                   >
                     <Download size={18} /> Resume
                   </a>
                   <div className="flex gap-2 ml-2">
-                    <a href={D.personal.social.github} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-[var(--c-line)] hover:bg-[var(--c-surface)] transition-colors" aria-label="GitHub">
+                    <a href={D.personal.social.github} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-50 text-slate-700 hover:text-indigo-600 transition-colors" aria-label="GitHub">
                       <GithubIcon size={20} />
                     </a>
-                    <a href={D.personal.social.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-[var(--c-line)] hover:bg-[var(--c-surface)] transition-colors" aria-label="LinkedIn">
+                    <a href={D.personal.social.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-50 text-slate-700 hover:text-indigo-600 transition-colors" aria-label="LinkedIn">
                       <LinkedinIcon size={20} />
                     </a>
                   </div>
                 </div>
 
                 {/* Stats ribbon */}
-                <div className="grid grid-cols-4 gap-6 pt-8 border-t border-[var(--c-line)] w-full max-w-lg">
+                <div className="grid grid-cols-4 gap-6 pt-8 border-t border-slate-200 w-full max-w-lg bg-white rounded-xl">
                   {D.personal.stats.map(stat => (
                     <div key={stat.label}>
-                      <div className="text-2xl sm:text-3xl font-bold text-[var(--c-ink)]">{stat.value}</div>
-                      <div className="text-xs font-medium text-[var(--c-muted)] mt-1">{stat.label}</div>
+                      <div className="text-2xl sm:text-3xl font-bold text-indigo-600">{stat.value}</div>
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mt-1">{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -109,8 +109,8 @@ export default function HomePage() {
               {/* Right — Profile */}
               <div className="hidden lg:flex justify-center relative">
                 <div className="relative w-[340px] h-[340px] xl:w-[400px] xl:h-[400px]">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-[var(--c-accent-indigo)] to-[var(--c-accent-cyan)] rounded-[2rem] blur-2xl opacity-20" />
-                  <div className="relative w-full h-full rounded-[2rem] overflow-hidden border border-[var(--c-line)] shadow-2xl z-10">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500 to-cyan-400 rounded-[2rem] blur-2xl opacity-20" />
+                  <div className="relative w-full h-full rounded-[2rem] overflow-hidden border border-slate-200 shadow-2xl z-10 bg-white">
                     <Image
                       src={D.personal.profileImage}
                       alt={D.personal.shortName}
@@ -127,35 +127,38 @@ export default function HomePage() {
         </section>
 
         {/* ═══════ #projects — Featured Work ═══════════════════════════════ */}
-        <section id="projects" className="py-24 border-t border-[var(--c-line)]">
+        <section id="projects" className="py-24 border-t border-slate-200 bg-slate-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <SectionLabel label="Featured Work" />
-            <h2 className="text-3xl font-bold mb-16">Projects</h2>
+            <h2 className="text-3xl font-bold mb-16 text-slate-900">Projects</h2>
 
             {/* Flagship — ORCare */}
-            <div className="mb-16 p-8 sm:p-10 rounded-2xl border border-[var(--c-line)] bg-[var(--c-surface)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-[var(--c-accent-indigo)]/10 to-transparent rounded-bl-full -z-0" />
+            <div className="mb-12 p-8 sm:p-10 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-indigo-50 to-transparent rounded-bl-full -z-0" />
 
               <div className="relative z-10">
                 <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className="text-xs font-bold uppercase tracking-widest text-[var(--c-accent-indigo)]">
+                  <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
                     Flagship · {D.projects.flagship.category}
                   </span>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[var(--c-accent-emerald)]/10 text-[var(--c-accent-emerald)] border border-[var(--c-accent-emerald)]/20">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--c-accent-emerald)] animate-pulse-dot" />
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse-dot" />
                     {D.projects.flagship.status}
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold mb-2">{D.projects.flagship.title}</h3>
-                <p className="text-[var(--c-muted)] max-w-2xl mb-8">{D.projects.flagship.overview}</p>
+                <h3 className="text-2xl sm:text-3xl font-bold mb-2 text-slate-900">{D.projects.flagship.title}</h3>
+                <p className="text-slate-600 max-w-2xl mb-8 leading-relaxed">{D.projects.flagship.overview}</p>
 
                 {/* Architecture pillars */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                   {D.projects.flagship.architecture.map(a => (
-                    <div key={a.pillar} className="p-4 rounded-xl border border-[var(--c-line)] bg-[var(--c-canvas)]">
-                      <div className="text-xs font-bold uppercase tracking-widest text-[var(--c-accent-indigo)] mb-1">{a.pillar}</div>
-                      <div className="text-sm text-[var(--c-muted)]">{a.detail}</div>
+                    <div key={a.pillar} className="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <CheckCircle2 size={14} className="text-indigo-600" />
+                        <div className="text-xs font-bold uppercase tracking-widest text-slate-900">{a.pillar}</div>
+                      </div>
+                      <div className="text-sm text-slate-600">{a.detail}</div>
                     </div>
                   ))}
                 </div>
@@ -163,10 +166,10 @@ export default function HomePage() {
                 {/* Metrics */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
                   {D.projects.flagship.metrics.map(m => (
-                    <div key={m.label} className="text-center p-4 rounded-xl bg-[var(--c-accent-indigo)]/5 border border-[var(--c-accent-indigo)]/10">
-                      <div className="text-2xl font-bold text-[var(--c-accent-indigo)]">{m.value}</div>
-                      <div className="text-xs font-semibold text-[var(--c-ink)] mt-1">{m.label}</div>
-                      <div className="text-[10px] text-[var(--c-muted)]">{m.detail}</div>
+                    <div key={m.label} className="text-center p-4 rounded-xl bg-indigo-50/50 border border-indigo-100">
+                      <div className="text-2xl font-bold text-indigo-600">{m.value}</div>
+                      <div className="text-xs font-bold text-slate-900 mt-1 uppercase tracking-wide">{m.label}</div>
+                      <div className="text-[10px] text-slate-500 mt-0.5">{m.detail}</div>
                     </div>
                   ))}
                 </div>
@@ -174,7 +177,7 @@ export default function HomePage() {
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-8">
                   {D.projects.flagship.tags.map(tag => (
-                    <span key={tag} className="text-xs px-3 py-1.5 rounded-lg border border-[var(--c-line)] bg-[var(--c-canvas)] font-medium text-[var(--c-muted)]">
+                    <span key={tag} className="text-xs px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-100 font-medium text-slate-700">
                       {tag}
                     </span>
                   ))}
@@ -183,12 +186,12 @@ export default function HomePage() {
                 {/* Links */}
                 <div className="flex flex-wrap gap-3">
                   {D.projects.flagship.liveDemo && (
-                    <a href={D.projects.flagship.liveDemo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[var(--c-accent-indigo)] text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity">
+                    <a href={D.projects.flagship.liveDemo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 shadow-sm transition-colors">
                       <ExternalLink size={16} /> Live Demo
                     </a>
                   )}
                   {D.projects.flagship.links.map(link => (
-                    <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-[var(--c-line)] px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-[var(--c-surface)] transition-colors">
+                    <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-slate-200 bg-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-slate-50 text-slate-700 hover:text-indigo-600 shadow-sm transition-colors">
                       <GithubIcon size={16} /> {link.name}
                     </a>
                   ))}
@@ -199,28 +202,28 @@ export default function HomePage() {
             {/* Secondary projects grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {D.projects.secondary.map(proj => (
-                <div key={proj.slug} className="p-6 rounded-2xl border border-[var(--c-line)] bg-[var(--c-surface)] flex flex-col hover:border-[var(--c-accent-indigo)]/40 transition-colors">
-                  <span className="text-xs font-bold uppercase tracking-widest text-[var(--c-accent-indigo)] mb-3">{proj.subtitle}</span>
-                  <h3 className="text-lg font-bold mb-2">{proj.title}</h3>
-                  <p className="text-sm text-[var(--c-muted)] mb-4 line-clamp-3 flex-1">{proj.overview}</p>
+                <div key={proj.slug} className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col hover:shadow-md hover:border-slate-300 transition-all">
+                  <span className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">{proj.subtitle}</span>
+                  <h3 className="text-lg font-bold mb-2 text-slate-900">{proj.title}</h3>
+                  <p className="text-sm text-slate-600 mb-4 line-clamp-3 flex-1 leading-relaxed">{proj.overview}</p>
 
-                  <div className="text-xs font-semibold text-[var(--c-accent-emerald)] mb-4 flex items-center gap-1.5">
+                  <div className="text-xs font-semibold text-emerald-700 mb-4 flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1.5 rounded-md border border-emerald-100 w-fit">
                     <CheckCircle2 size={14} />
                     {proj.highlight}
                   </div>
 
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {proj.tags.slice(0, 4).map(tag => (
-                      <span key={tag} className="text-[10px] px-2 py-1 rounded-md border border-[var(--c-line)] text-[var(--c-muted)] font-medium">{tag}</span>
+                      <span key={tag} className="text-[10px] px-2 py-1 rounded-md border border-slate-200/80 bg-slate-50 text-slate-600 font-medium">{tag}</span>
                     ))}
                     {proj.tags.length > 4 && (
-                      <span className="text-[10px] px-2 py-1 rounded-md border border-[var(--c-line)] text-[var(--c-muted)] font-medium">+{proj.tags.length - 4}</span>
+                      <span className="text-[10px] px-2 py-1 rounded-md border border-slate-200/80 bg-slate-50 text-slate-600 font-medium">+{proj.tags.length - 4}</span>
                     )}
                   </div>
 
                   {'github' in proj && typeof proj.github === 'string' && (
-                    <a href={proj.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--c-accent-indigo)] hover:underline mt-auto">
-                      <GithubIcon size={14} /> View Source
+                    <a href={proj.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-700 mt-auto w-fit transition-colors">
+                      <GithubIcon size={16} /> View Source
                     </a>
                   )}
                 </div>
@@ -230,35 +233,35 @@ export default function HomePage() {
         </section>
 
         {/* ═══════ #architecture — ADRs ════════════════════════════════════ */}
-        <section id="architecture" className="py-24 border-t border-[var(--c-line)]">
+        <section id="architecture" className="py-24 border-t border-slate-200 bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <SectionLabel label="Engineering Decisions" />
-            <h2 className="text-3xl font-bold mb-16">Architecture Decision Records</h2>
+            <h2 className="text-3xl font-bold mb-16 text-slate-900">Architecture Decision Records</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {D.adrs.map(adr => (
-                <div key={adr.id} className="p-6 rounded-2xl border border-[var(--c-line)] bg-[var(--c-surface)] flex flex-col">
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-xs font-bold font-[family-name:var(--font-jetbrains)] text-[var(--c-accent-cyan)]">{adr.id}</span>
-                    <span className="ml-auto text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[var(--c-accent-emerald)]/10 text-[var(--c-accent-emerald)] border border-[var(--c-accent-emerald)]/20">
+                <div key={adr.id} className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-2 mb-5 pb-5 border-b border-slate-100">
+                    <span className="text-xs font-bold font-[family-name:var(--font-jetbrains)] text-cyan-600 bg-cyan-50 px-2 py-1 rounded-md border border-cyan-100">{adr.id}</span>
+                    <span className="ml-auto text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
                       {adr.status}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-bold mb-4">{adr.title}</h3>
+                  <h3 className="text-base font-bold mb-5 text-slate-900">{adr.title}</h3>
 
-                  <div className="space-y-3 text-sm text-[var(--c-muted)] flex-1">
+                  <div className="space-y-4 text-sm text-slate-600 flex-1">
                     <div>
-                      <span className="font-semibold text-[var(--c-ink)] text-xs uppercase tracking-wider">Context</span>
-                      <p className="mt-1 leading-relaxed">{adr.context}</p>
+                      <span className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1 block">Context</span>
+                      <p className="leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">{adr.context}</p>
                     </div>
                     <div>
-                      <span className="font-semibold text-[var(--c-ink)] text-xs uppercase tracking-wider">Decision</span>
-                      <p className="mt-1 leading-relaxed">{adr.decision}</p>
+                      <span className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1 block">Decision</span>
+                      <p className="leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">{adr.decision}</p>
                     </div>
                     <div>
-                      <span className="font-semibold text-[var(--c-ink)] text-xs uppercase tracking-wider">Consequence</span>
-                      <p className="mt-1 leading-relaxed">{adr.consequence}</p>
+                      <span className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1 block">Consequence</span>
+                      <p className="leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">{adr.consequence}</p>
                     </div>
                   </div>
                 </div>
@@ -268,35 +271,35 @@ export default function HomePage() {
         </section>
 
         {/* ═══════ #skills — Competencies ══════════════════════════════════ */}
-        <section id="skills" className="py-24 border-t border-[var(--c-line)]">
+        <section id="skills" className="py-24 border-t border-slate-200 bg-slate-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <SectionLabel label="Technologies & Tools" />
-            <h2 className="text-3xl font-bold mb-16">Technical Skills</h2>
+            <h2 className="text-3xl font-bold mb-16 text-slate-900">Technical Skills</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {D.skills.map(cat => {
                 const Icon = skillIconMap[cat.icon] || Code2;
                 return (
-                  <div key={cat.title} className="p-8 rounded-2xl border border-[var(--c-line)] bg-[var(--c-surface)]">
+                  <div key={cat.title} className="p-8 rounded-2xl border border-slate-200 bg-white shadow-sm">
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="w-12 h-12 rounded-xl bg-[var(--c-accent-indigo)]/10 text-[var(--c-accent-indigo)] flex items-center justify-center border border-[var(--c-accent-indigo)]/20">
+                      <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100">
                         <Icon size={24} />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold">{cat.title}</h3>
-                        <p className="text-xs text-[var(--c-muted)]">{cat.items.length} technologies</p>
+                        <h3 className="text-lg font-bold text-slate-900">{cat.title}</h3>
+                        <p className="text-xs font-medium text-slate-500">{cat.items.length} technologies</p>
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2.5">
                       {cat.items.map(skill => (
                         <span
                           key={skill.name}
-                          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[var(--c-line)] bg-[var(--c-canvas)] text-sm font-medium hover:border-[var(--c-accent-indigo)]/40 transition-colors"
+                          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200/80 bg-slate-50 text-slate-700 text-sm font-medium hover:bg-white hover:border-indigo-300 transition-colors shadow-sm"
                         >
                           <span
                             className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                              skill.status === 'Proficient' ? 'bg-[var(--c-accent-emerald)]' : 'bg-[var(--c-accent-indigo)]'
+                              skill.status === 'Proficient' ? 'bg-emerald-500' : 'bg-indigo-500'
                             }`}
                             aria-hidden="true"
                           />
@@ -310,22 +313,22 @@ export default function HomePage() {
             </div>
 
             {/* Legend */}
-            <div className="flex items-center justify-center gap-8 mt-8 text-xs font-medium text-[var(--c-muted)]">
+            <div className="flex items-center justify-center gap-8 mt-10 text-xs font-bold text-slate-600 uppercase tracking-widest">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[var(--c-accent-emerald)]" /> Proficient
+                <span className="w-2 h-2 rounded-full bg-emerald-500" /> Proficient
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[var(--c-accent-indigo)]" /> Experienced
+                <span className="w-2 h-2 rounded-full bg-indigo-500" /> Experienced
               </div>
             </div>
           </div>
         </section>
 
         {/* ═══════ #credentials — Certifications ══════════════════════════ */}
-        <section id="credentials" className="py-24 border-t border-[var(--c-line)]">
+        <section id="credentials" className="py-24 border-t border-slate-200 bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <SectionLabel label="Verified Credentials" />
-            <h2 className="text-3xl font-bold mb-16">Certifications</h2>
+            <h2 className="text-3xl font-bold mb-16 text-slate-900">Certifications</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {D.credentials.map((cert, i) => (
@@ -334,16 +337,16 @@ export default function HomePage() {
                   href={cert.verifyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group p-5 rounded-2xl border border-[var(--c-line)] bg-[var(--c-surface)] hover:border-[var(--c-accent-indigo)]/40 transition-all flex items-start gap-4"
+                  className="group p-5 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-slate-300 transition-all flex items-start gap-4"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[var(--c-accent-indigo)]/10 text-[var(--c-accent-indigo)] flex items-center justify-center shrink-0 border border-[var(--c-accent-indigo)]/20">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-100">
                     <Award size={20} />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-sm font-bold group-hover:text-[var(--c-accent-indigo)] transition-colors leading-snug mb-1">{cert.title}</h3>
-                    <p className="text-xs text-[var(--c-muted)]">{cert.issuer} · {cert.date}</p>
+                    <h3 className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug mb-1">{cert.title}</h3>
+                    <p className="text-xs font-medium text-slate-500">{cert.issuer} · {cert.date}</p>
                   </div>
-                  <ExternalLink size={14} className="text-[var(--c-muted)] group-hover:text-[var(--c-accent-indigo)] shrink-0 mt-1 transition-colors" />
+                  <ExternalLink size={14} className="text-slate-400 group-hover:text-indigo-600 shrink-0 mt-1 transition-colors" />
                 </a>
               ))}
             </div>
@@ -351,16 +354,16 @@ export default function HomePage() {
         </section>
 
         {/* ═══════ #terminal — Terminal Preview ═══════════════════════════ */}
-        <section id="terminal" className="py-24 border-t border-[var(--c-line)]">
+        <section id="terminal" className="py-24 border-t border-slate-200 bg-slate-50">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
             <SectionLabel label="Developer Tooling" />
-            <h2 className="text-3xl font-bold mb-4">Interactive Terminal</h2>
-            <p className="text-[var(--c-muted)] mb-8 max-w-lg mx-auto">
+            <h2 className="text-3xl font-bold mb-4 text-slate-900">Interactive Terminal</h2>
+            <p className="text-slate-600 mb-8 max-w-lg mx-auto leading-relaxed">
               Explore my background, projects, and skills through a developer-friendly terminal interface.
             </p>
             <button
               onClick={() => setTerminalOpen(true)}
-              className="inline-flex items-center gap-2 bg-[var(--c-ink)] text-[var(--c-canvas)] px-8 py-4 rounded-2xl font-semibold text-base hover:opacity-90 transition-opacity active:scale-95 shadow-lg"
+              className="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-xl font-semibold text-base hover:bg-slate-800 transition-colors active:scale-95 shadow-md hover:shadow-lg"
             >
               <TerminalIcon size={20} />
               Launch Terminal
@@ -369,36 +372,38 @@ export default function HomePage() {
         </section>
 
         {/* ═══════ #contact — Contact ═════════════════════════════════════ */}
-        <section id="contact" className="py-24 border-t border-[var(--c-line)]">
+        <section id="contact" className="py-24 border-t border-slate-200 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-            <SectionLabel label="Get In Touch" />
-            <h2 className="text-3xl font-bold mb-4">Let&apos;s Build Something Together</h2>
-            <p className="text-[var(--c-muted)] mb-10 max-w-lg mx-auto">
-              I&apos;m currently open to full-time software engineering opportunities. Whether you have a question or just want to say hi, my inbox is always open.
-            </p>
+            <div className="bg-gradient-to-b from-white to-slate-50 border border-slate-200 shadow-md rounded-3xl p-10 sm:p-16">
+              <SectionLabel label="Get In Touch" />
+              <h2 className="text-3xl font-bold mb-4 text-slate-900">Let&apos;s Build Something Together</h2>
+              <p className="text-slate-600 mb-10 max-w-lg mx-auto leading-relaxed">
+                I&apos;m currently open to full-time software engineering opportunities. Whether you have a question or just want to say hi, my inbox is always open.
+              </p>
 
-            <a
-              href={`mailto:${D.personal.email}`}
-              className="inline-flex items-center gap-3 bg-[var(--c-accent-indigo)] text-white px-8 py-4 rounded-2xl font-semibold text-base hover:opacity-90 transition-opacity active:scale-95 shadow-lg shadow-[var(--c-accent-indigo)]/20"
-            >
-              <Mail size={20} />
-              {D.personal.email}
-            </a>
+              <a
+                href={`mailto:${D.personal.email}`}
+                className="inline-flex items-center gap-3 bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-xl font-semibold text-base transition-colors active:scale-95 shadow-sm hover:shadow-md"
+              >
+                <Mail size={20} />
+                {D.personal.email}
+              </a>
 
-            <div className="flex items-center justify-center gap-4 mt-8">
-              <a href={D.personal.social.github} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-[var(--c-line)] hover:bg-[var(--c-surface)] transition-colors" aria-label="GitHub">
-                <GithubIcon size={20} />
-              </a>
-              <a href={D.personal.social.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-[var(--c-line)] hover:bg-[var(--c-surface)] transition-colors" aria-label="LinkedIn">
-                <LinkedinIcon size={20} />
-              </a>
+              <div className="flex items-center justify-center gap-4 mt-10">
+                <a href={D.personal.social.github} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-50 text-slate-700 hover:text-indigo-600 transition-colors" aria-label="GitHub">
+                  <GithubIcon size={20} />
+                </a>
+                <a href={D.personal.social.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-50 text-slate-700 hover:text-indigo-600 transition-colors" aria-label="LinkedIn">
+                  <LinkedinIcon size={20} />
+                </a>
+              </div>
             </div>
           </div>
         </section>
 
         {/* ═══════ Footer ═════════════════════════════════════════════════ */}
-        <footer className="py-8 border-t border-[var(--c-line)]">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-[var(--c-muted)]">
+        <footer className="py-8 border-t border-slate-200 bg-slate-50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-medium text-slate-500">
             <p>© {new Date().getFullYear()} {D.personal.fullName}. All rights reserved.</p>
             <div className="flex items-center gap-6">
               <span>Built with Next.js &amp; Tailwind CSS</span>
@@ -416,8 +421,8 @@ export default function HomePage() {
 /* ─── Reusable section label ────────────────────────────────────────────── */
 function SectionLabel({ label }: { label: string }) {
   return (
-    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--c-accent-indigo)]/20 bg-[var(--c-accent-indigo)]/5 text-[var(--c-accent-indigo)] text-xs font-bold uppercase tracking-widest mb-4">
-      <FileText size={12} />
+    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm">
+      <FileText size={14} />
       {label}
     </div>
   );

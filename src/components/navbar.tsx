@@ -1,8 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useTheme } from 'next-themes';
-import { Menu, X, Sun, Moon, Terminal, MessageSquare } from 'lucide-react';
+import { Menu, X, Terminal, MessageSquare } from 'lucide-react';
 import { PORTFOLIO_DATA } from '@/lib/portfolio-data';
 import { cn } from '@/lib/utils';
 
@@ -11,15 +10,11 @@ interface NavbarProps {
 }
 
 export function Navbar({ onTerminalOpen }: NavbarProps) {
-  const [mounted, setMounted] = React.useState(false);
-  const { theme, setTheme } = useTheme();
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [activeSection, setActiveSection] = React.useState<string>('');
 
   React.useEffect(() => {
-    setMounted(true);
-
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
@@ -63,26 +58,31 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 h-[88px] flex items-center transition-colors duration-300',
-          scrolled ? 'nav-frost border-b border-[var(--c-line)]' : 'bg-transparent border-transparent'
+          'fixed top-0 left-0 right-0 z-50 h-[88px] flex items-center transition-all duration-300',
+          scrolled 
+            ? 'bg-white/80 backdrop-blur-md border-b border-slate-200/80 shadow-sm' 
+            : 'bg-transparent border-transparent'
         )}
       >
-        <div className="container mx-auto px-4 md:px-6 h-full flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full flex items-center justify-between">
           
           {/* Left Side: Logo & Status */}
           <div className="flex items-center gap-4">
-            <a href="#" className="flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--c-accent-indigo)] text-white font-bold text-xl transition-transform hover:scale-105">
+            <a 
+              href="#" 
+              className="flex items-center justify-center w-10 h-10 rounded-lg bg-white border border-slate-200 shadow-sm text-indigo-600 font-bold text-xl transition-transform hover:scale-105"
+            >
               YN
             </a>
             
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--c-line)] bg-[var(--c-surface)]">
-              <span className="w-2 h-2 rounded-full bg-[var(--c-accent-emerald)] animate-pulse-dot" />
-              <span className="text-xs font-medium text-[var(--c-ink)]">Available for hire</span>
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-200 bg-white shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-dot" />
+              <span className="text-xs font-semibold text-slate-700">Available for hire</span>
             </div>
           </div>
 
           {/* Center: Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1 bg-slate-100/80 border border-slate-200/60 p-1 rounded-xl">
             {PORTFOLIO_DATA.navLinks.map((link) => {
               const isActive = activeSection === link.href.replace('#', '');
               return (
@@ -90,10 +90,10 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
                   key={link.label}
                   href={link.href}
                   className={cn(
-                    'px-4 py-2 rounded-md text-sm font-medium transition-colors',
+                    'px-4 py-2 rounded-lg text-sm transition-all',
                     isActive 
-                      ? 'bg-[var(--c-surface)] text-[var(--c-accent-indigo)]' 
-                      : 'text-[var(--c-muted)] hover:text-[var(--c-ink)] hover:bg-[var(--c-surface)]/50'
+                      ? 'bg-white text-indigo-600 shadow-sm border border-slate-200/60 font-semibold' 
+                      : 'text-slate-600 font-medium hover:text-slate-900 hover:bg-slate-200/50 border border-transparent'
                   )}
                 >
                   {link.label}
@@ -104,20 +104,10 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
 
           {/* Right Side: Actions */}
           <div className="flex items-center gap-2 md:gap-4">
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="p-2 rounded-md text-[var(--c-muted)] hover:text-[var(--c-ink)] hover:bg-[var(--c-surface)] transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
-            )}
-
             {onTerminalOpen && (
               <button
                 onClick={onTerminalOpen}
-                className="hidden md:flex p-2 rounded-md text-[var(--c-muted)] hover:text-[var(--c-ink)] hover:bg-[var(--c-surface)] transition-colors"
+                className="hidden md:flex p-2 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors border border-transparent hover:border-indigo-100"
                 aria-label="Open terminal"
               >
                 <Terminal size={20} />
@@ -126,7 +116,7 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
 
             <a
               href="#contact"
-              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-md bg-[var(--c-ink)] text-[var(--c-canvas)] font-medium text-sm transition-transform hover:scale-105"
+              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 text-white font-medium text-sm transition-all hover:bg-indigo-700 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0"
             >
               <MessageSquare size={16} />
               Let's Talk
@@ -134,7 +124,7 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
 
             {/* Mobile Toggle */}
             <button
-              className="lg:hidden p-2 rounded-md text-[var(--c-ink)]"
+              className="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -146,7 +136,7 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
       {/* Mobile Drawer */}
       <div 
         className={cn(
-          'fixed inset-0 z-40 bg-[var(--c-canvas)]/80 backdrop-blur-sm transition-opacity lg:hidden',
+          'fixed inset-0 z-40 bg-slate-900/20 backdrop-blur-sm transition-opacity lg:hidden',
           mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         )}
         onClick={closeMobileMenu}
@@ -154,7 +144,7 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
       
       <div 
         className={cn(
-          'fixed top-0 right-0 z-40 h-full w-[280px] bg-[var(--c-surface)] border-l border-[var(--c-line)] pt-[88px] transition-transform duration-300 lg:hidden shadow-2xl',
+          'fixed top-0 right-0 z-40 h-full w-[280px] bg-white border-l border-slate-200 pt-[88px] transition-transform duration-300 lg:hidden shadow-2xl',
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         )}
       >
@@ -167,10 +157,10 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
                 href={link.href}
                 onClick={closeMobileMenu}
                 className={cn(
-                  'px-4 py-3 rounded-md text-base font-medium transition-colors',
+                  'px-4 py-3 rounded-lg text-base transition-colors',
                   isActive 
-                    ? 'bg-[var(--c-canvas)] text-[var(--c-accent-indigo)] border border-[var(--c-line)]' 
-                    : 'text-[var(--c-muted)] hover:text-[var(--c-ink)] hover:bg-[var(--c-canvas)]/50'
+                    ? 'bg-indigo-50 text-indigo-600 font-semibold border border-indigo-100' 
+                    : 'text-slate-600 font-medium hover:text-slate-900 hover:bg-slate-50 border border-transparent'
                 )}
               >
                 {link.label}
@@ -178,14 +168,14 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
             );
           })}
           
-          <div className="mt-4 pt-4 border-t border-[var(--c-line)] flex flex-col gap-3">
+          <div className="mt-4 pt-4 border-t border-slate-200 flex flex-col gap-3">
             {onTerminalOpen && (
               <button
                 onClick={() => {
                   onTerminalOpen();
                   closeMobileMenu();
                 }}
-                className="flex items-center gap-2 px-4 py-3 rounded-md text-left text-base font-medium text-[var(--c-ink)] hover:bg-[var(--c-canvas)]/50 transition-colors"
+                className="flex items-center gap-2 px-4 py-3 rounded-lg text-left text-base font-medium text-slate-700 hover:bg-slate-50 border border-transparent transition-colors"
               >
                 <Terminal size={20} />
                 Open Terminal
@@ -195,7 +185,7 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
             <a
               href="#contact"
               onClick={closeMobileMenu}
-              className="flex items-center justify-center gap-2 px-4 py-3 rounded-md bg-[var(--c-ink)] text-[var(--c-canvas)] font-medium text-base w-full"
+              className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-indigo-600 text-white font-medium text-base w-full hover:bg-indigo-700 transition-colors shadow-sm"
             >
               <MessageSquare size={18} />
               Let's Talk

@@ -27,6 +27,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const subtitle = 'subtitle' in project ? project.subtitle : '';
   const liveDemo = 'liveDemo' in project ? project.liveDemo : undefined;
   const images = 'images' in project && Array.isArray(project.images) ? project.images : [];
+  const captions = 'captions' in project && Array.isArray(project.captions) ? project.captions : undefined;
   
   // Extract links
   let links: {name: string, url: string}[] = [];
@@ -98,7 +99,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
         {/* Media Showcase */}
         <div className="mb-20">
-          <ProjectSlideshow images={images} title={project.title} />
+          <ProjectSlideshow images={images} title={project.title} captions={captions} />
         </div>
 
         {/* In-depth Sections */}

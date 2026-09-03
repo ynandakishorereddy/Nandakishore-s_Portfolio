@@ -137,18 +137,21 @@ export default function HomePage() {
               {getAllProjects().map(proj => {
                 const category = 'category' in proj ? proj.category : proj.subtitle;
                 const highlight = 'highlight' in proj ? proj.highlight : null;
-                const firstImage = ('images' in proj && Array.isArray(proj.images)) ? proj.images[0] : '';
+                const firstImage = (proj as any).images?.[0] || '';
                 
                 return (
                   <div key={proj.slug} className="group relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:border-rose-300 flex flex-col justify-between cursor-pointer">
                     <Link href={`/projects/${proj.slug}`} className="block mb-4">
                       {/* 16:9 Image Preview */}
-                      <div className="w-full aspect-video rounded-xl bg-slate-100 overflow-hidden mb-5 relative border border-slate-200/60">
-                        {firstImage ? (
-                          <img src={firstImage} alt={proj.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-slate-400">Preview</div>
-                        )}
+                      <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-100 bg-slate-100 mb-5">
+                        <Image
+                          alt={`${proj.title} Preview`}
+                          className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                          fill
+                          priority
+                          src={('thumbnail' in proj && typeof proj.thumbnail === 'string' && proj.thumbnail) ? proj.thumbnail : ((proj as any).images?.[0] || '/projects/retailiq/retailiq-thumb.svg')}
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
                       </div>
                       
                       <span className="text-xs font-bold uppercase tracking-widest text-rose-800 mb-2 block">{category}</span>

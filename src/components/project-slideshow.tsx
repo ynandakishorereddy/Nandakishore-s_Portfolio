@@ -6,9 +6,10 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 interface ProjectSlideshowProps {
   images: string[];
   title: string;
+  captions?: string[];
 }
 
-export function ProjectSlideshow({ images, title }: ProjectSlideshowProps) {
+export function ProjectSlideshow({ images, title, captions }: ProjectSlideshowProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -83,6 +84,12 @@ export function ProjectSlideshow({ images, title }: ProjectSlideshowProps) {
           />
         ))}
       </div>
+        {/* Caption */}
+      {captions && captions[currentIndex] && (
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-md text-white text-sm font-medium px-4 py-2 rounded-xl text-center max-w-[80%] shadow-lg">
+          {captions[currentIndex]}
+        </div>
+      )}
     </div>
   );
 }

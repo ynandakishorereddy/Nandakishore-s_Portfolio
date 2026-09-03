@@ -119,15 +119,31 @@ export const PORTFOLIO_DATA = {
         highlight: "100% service-layer test coverage",
       },
       {
-        slug: "retailiq",
-        title: "RetailIQ",
-        subtitle: "AI-Powered Analytics Dashboard",
-        thumbnail: "/projects/retailiq/retailiq-thumb.svg",
-        images: ["/projects/retailiq/retailiq-1.svg", "/projects/retailiq/retailiq-2.svg", "/projects/retailiq/retailiq-3.svg"],
-        captions: ["RetailIQ Dashboard Placeholder", "Analytics View", "Store Settings"],
-        overview: "AI-powered retail analytics dashboard that surfaces inventory forecasts and sales trends from SQL Server data, built during the Cognizant internship.",
-        tags: ["ASP.NET Core", "SQL Server", "AI/ML", "EF Core", "Azure"],
-        highlight: "Real-time inventory forecasting",
+        slug: "prepwise",
+        title: "PrepWise",
+        category: "AI Learning & Exam Preparation SaaS",
+        subtitle: "Adaptive AI-driven study planner and concept mastery platform",
+        overview: "An intelligent exam-prep ecosystem that analyzes student knowledge gaps, dynamically generates personalized question sets, and delivers real-time concept explanations using LLM reasoning pipelines.",
+        architecture: [
+          { pillar: "Frontend", detail: "Next.js 15 App Router & Server Components for zero-bundle text delivery" },
+          { pillar: "Backend", detail: "TypeScript & Prisma ORM connected to PostgreSQL" },
+          { pillar: "AI Integration", detail: "Gemini / OpenAI API streaming integration for instant answer breakdowns" },
+          { pillar: "Auth", detail: "NextAuth / Clerk for secure session token management" }
+        ],
+        metrics: [
+          { label: "Query Latency", value: "<1.8s", detail: "" },
+          { label: "Study Efficiency", value: "+42%", detail: "" },
+          { label: "Test Accuracy", value: "96.4%", detail: "" }
+        ],
+        tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "TailwindCSS", "AI API"],
+        github: "https://github.com/ynandakishorereddy/prepwise",
+        liveDemo: "https://prepwise.example.com",
+        highlight: "Designed adaptive spaced-repetition algorithms to target weak knowledge domains.",
+        highlights: [
+          "Designed adaptive spaced-repetition algorithms to target weak knowledge domains.",
+          "Implemented streamed AI response chunks to reduce perceived latency below 200ms.",
+          "Engineered relational schemas for tracking granular student test attempts and progress."
+        ]
       },
     ],
   },

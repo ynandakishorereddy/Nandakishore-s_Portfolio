@@ -99,7 +99,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
         {/* Media Showcase */}
         <div className="mb-20">
-          <ProjectSlideshow images={images} title={project.title} captions={captions} />
+          <ProjectSlideshow images={images} title={project.title} captions={captions} category={category} />
         </div>
 
         {/* In-depth Sections */}

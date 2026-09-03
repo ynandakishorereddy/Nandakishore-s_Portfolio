@@ -1,15 +1,17 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
+import Image from 'next/image';
 
 interface ProjectSlideshowProps {
   images: string[];
   title: string;
   captions?: string[];
+  category?: string;
 }
 
-export function ProjectSlideshow({ images, title, captions }: ProjectSlideshowProps) {
+export function ProjectSlideshow({ images, title, captions, category }: ProjectSlideshowProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -35,18 +37,24 @@ export function ProjectSlideshow({ images, title, captions }: ProjectSlideshowPr
 
   if (!images || images.length === 0) {
     return (
-      <div className="w-full aspect-video rounded-2xl bg-slate-900 border border-slate-200 flex items-center justify-center text-slate-500 shadow-lg">
-        No images available
+      <div className="w-full aspect-video rounded-2xl bg-slate-100 border border-slate-200 flex flex-col items-center justify-center text-slate-500 shadow-sm p-6 text-center">
+        <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 text-slate-400">
+          <CheckCircle2 size={32} />
+        </div>
+        {category && <span className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">{category}</span>}
+        <h3 className="text-3xl font-bold text-slate-700">{title}</h3>
       </div>
     );
   }
 
   return (
     <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-100 group">
-      <img
+      <Image
         src={images[currentIndex]}
         alt={`${title} screenshot ${currentIndex + 1}`}
-        className="w-full h-full object-cover"
+        className="object-cover"
+        fill
+        priority
       />
 
       {/* Navigation Buttons */}

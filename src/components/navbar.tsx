@@ -70,7 +70,7 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
           <div className="flex items-center gap-4">
             <a 
               href="#" 
-              className="flex items-center justify-center w-10 h-10 rounded-lg bg-white border border-slate-200 shadow-sm text-indigo-600 font-bold text-xl transition-transform hover:scale-105"
+              className="flex items-center justify-center w-10 h-10 rounded-lg bg-white border border-slate-200 shadow-sm text-rose-800 font-bold text-xl transition-transform hover:scale-105"
             >
               YN
             </a>
@@ -92,7 +92,7 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
                   className={cn(
                     'px-4 py-2 rounded-lg text-sm transition-all',
                     isActive 
-                      ? 'bg-white text-indigo-600 shadow-sm border border-slate-200/60 font-semibold' 
+                      ? 'bg-white text-rose-800 shadow-sm border border-slate-200/60 font-semibold' 
                       : 'text-slate-600 font-medium hover:text-slate-900 hover:bg-slate-200/50 border border-transparent'
                   )}
                 >
@@ -107,7 +107,7 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
             {onTerminalOpen && (
               <button
                 onClick={onTerminalOpen}
-                className="hidden md:flex p-2 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors border border-transparent hover:border-indigo-100"
+                className="hidden md:flex p-2 rounded-lg text-slate-500 hover:text-rose-800 hover:bg-rose-50 transition-colors border border-transparent hover:border-rose-100"
                 aria-label="Open terminal"
               >
                 <Terminal size={20} />
@@ -116,7 +116,7 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
 
             <a
               href="#contact"
-              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 text-white font-medium text-sm transition-all hover:bg-indigo-700 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0"
+              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-rose-800 text-white font-medium text-sm transition-all hover:bg-rose-700 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0"
             >
               <MessageSquare size={16} />
               Let's Talk
@@ -159,7 +159,7 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
                 className={cn(
                   'px-4 py-3 rounded-lg text-base transition-colors',
                   isActive 
-                    ? 'bg-indigo-50 text-indigo-600 font-semibold border border-indigo-100' 
+                    ? 'bg-rose-50 text-rose-800 font-semibold border border-rose-100' 
                     : 'text-slate-600 font-medium hover:text-slate-900 hover:bg-slate-50 border border-transparent'
                 )}
               >
@@ -185,7 +185,7 @@ export function Navbar({ onTerminalOpen }: NavbarProps) {
             <a
               href="#contact"
               onClick={closeMobileMenu}
-              className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-indigo-600 text-white font-medium text-base w-full hover:bg-indigo-700 transition-colors shadow-sm"
+              className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-rose-800 text-white font-medium text-base w-full hover:bg-rose-700 transition-colors shadow-sm"
             >
               <MessageSquare size={18} />
               Let's Talk

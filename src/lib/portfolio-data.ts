@@ -51,7 +51,6 @@ export const PORTFOLIO_DATA = {
   navLinks: [
     { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
-    { label: "Architecture", href: "#architecture" },
     { label: "Skills", href: "#skills" },
     { label: "Credentials", href: "#credentials" },
     { label: "Contact", href: "#contact" },
@@ -311,3 +310,7 @@ export const PORTFOLIO_DATA = {
 // Re-export convenience aliases used by legacy imports
 export const personalInfo = PORTFOLIO_DATA.personal;
 export const navItems = PORTFOLIO_DATA.navLinks;
+
+export function getAllProjects() {
+  return [PORTFOLIO_DATA.projects.flagship, ...PORTFOLIO_DATA.projects.secondary];
+}

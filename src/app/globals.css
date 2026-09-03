@@ -9,8 +9,8 @@
 
 /* ─── Light Mode Design Tokens ───────────────────────────────────────────── */
 :root, .dark {
-  --c-canvas: #ffffff;
-  --c-canvas-sec: #f8fafc;
+  --c-canvas: #f8fafc;
+  --c-canvas-sec: #ffffff;
   --c-surface: #ffffff;
   --c-line: #e2e8f0;
   --c-line-hover: #cbd5e1;
@@ -18,13 +18,14 @@
   --c-muted: #64748b;
   --c-slate-text: #334155;
   
-  --c-accent-indigo: #4f46e5;
-  --c-accent-indigo-soft: rgba(79, 70, 229, 0.06);
+  --c-accent-primary: #9f1239;
+  --c-accent-hover: #be123c;
+  --c-accent-tint: rgba(159, 18, 57, 0.08);
   --c-accent-cyan: #0284c7;
   --c-accent-emerald: #059669;
   
   --c-nav: rgba(255, 255, 255, 0.82);
-  --c-mesh: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(79, 70, 229, 0.08) 0%, rgba(14, 165, 233, 0.04) 50%, transparent 100%);
+  --c-mesh: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(159, 18, 57, 0.08) 0%, rgba(190, 18, 60, 0.04) 50%, transparent 100%);
   --c-mesh-opacity: 1;
 }
 
@@ -41,7 +42,7 @@ body {
 }
 
 ::selection {
-  background-color: var(--c-accent-indigo);
+  background-color: var(--c-accent-primary);
   color: white;
 }
 
@@ -94,8 +95,8 @@ body {
 }
 
 @keyframes pulse-node {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.3); }
-  50% { box-shadow: 0 0 0 6px rgba(79, 70, 229, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(159, 18, 57, 0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(159, 18, 57, 0); }
 }
 
 @keyframes gradient {

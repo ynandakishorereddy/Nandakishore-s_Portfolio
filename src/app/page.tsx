@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   ArrowRight,
   ExternalLink,
@@ -52,12 +53,12 @@ export default function HomePage() {
 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-4">
                   <span className="text-slate-900">{D.personal.fullName.split(' ')[0]} </span>
-                  <span className="text-indigo-600">
+                  <span className="text-rose-800">
                     {D.personal.fullName.split(' ').slice(1).join(' ')}
                   </span>
                 </h1>
 
-                <p className="text-xl font-semibold text-indigo-600 mb-2">
+                <p className="text-xl font-semibold text-rose-800 mb-2">
                   {D.personal.headline}
                 </p>
                 <p className="text-sm font-medium text-slate-500 mb-6 flex items-center gap-2">
@@ -73,7 +74,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap gap-4 items-center mb-10">
                   <a
                     href="#projects"
-                    className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm px-6 py-3 rounded-xl font-medium transition-all active:scale-95"
+                    className="inline-flex items-center gap-2 bg-rose-800 hover:bg-rose-700 text-white shadow-sm px-6 py-3 rounded-xl font-medium transition-all active:scale-95"
                   >
                     View Projects <ArrowRight size={18} />
                   </a>
@@ -86,10 +87,10 @@ export default function HomePage() {
                     <Download size={18} /> Resume
                   </a>
                   <div className="flex gap-2 ml-2">
-                    <a href={D.personal.social.github} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-50 text-slate-700 hover:text-indigo-600 transition-colors" aria-label="GitHub">
+                    <a href={D.personal.social.github} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-50 text-slate-700 hover:text-rose-800 transition-colors" aria-label="GitHub">
                       <GithubIcon size={20} />
                     </a>
-                    <a href={D.personal.social.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-50 text-slate-700 hover:text-indigo-600 transition-colors" aria-label="LinkedIn">
+                    <a href={D.personal.social.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-50 text-slate-700 hover:text-rose-800 transition-colors" aria-label="LinkedIn">
                       <LinkedinIcon size={20} />
                     </a>
                   </div>
@@ -99,7 +100,7 @@ export default function HomePage() {
                 <div className="grid grid-cols-4 gap-6 pt-8 border-t border-slate-200 w-full max-w-lg bg-white rounded-xl">
                   {D.personal.stats.map(stat => (
                     <div key={stat.label}>
-                      <div className="text-2xl sm:text-3xl font-bold text-indigo-600">{stat.value}</div>
+                      <div className="text-2xl sm:text-3xl font-bold text-rose-800">{stat.value}</div>
                       <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mt-1">{stat.label}</div>
                     </div>
                   ))}
@@ -109,8 +110,8 @@ export default function HomePage() {
               {/* Right — Profile */}
               <div className="hidden lg:flex justify-center relative">
                 <div className="relative w-[340px] h-[340px] xl:w-[400px] xl:h-[400px]">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500 to-cyan-400 rounded-[2rem] blur-2xl opacity-20" />
-                  <div className="relative w-full h-full rounded-[2rem] overflow-hidden border border-slate-200 shadow-2xl z-10 bg-white">
+                  <div className="absolute inset-0 bg-rose-800/30 blur-3xl rounded-full" />
+                  <div className="relative w-full h-full rounded-full overflow-hidden border border-slate-200 shadow-2xl z-10 bg-white">
                     <Image
                       src={D.personal.profileImage}
                       alt={D.personal.shortName}
@@ -134,11 +135,11 @@ export default function HomePage() {
 
             {/* Flagship — ORCare */}
             <div className="mb-12 p-8 sm:p-10 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-indigo-50 to-transparent rounded-bl-full -z-0" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-rose-50 to-transparent rounded-bl-full -z-0" />
 
               <div className="relative z-10">
                 <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+                  <span className="text-xs font-bold uppercase tracking-widest text-rose-800">
                     Flagship · {D.projects.flagship.category}
                   </span>
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
@@ -147,7 +148,7 @@ export default function HomePage() {
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold mb-2 text-slate-900">{D.projects.flagship.title}</h3>
+                <Link href={`/projects/${D.projects.flagship.slug}`}><h3 className="text-2xl sm:text-3xl font-bold mb-2 text-slate-900 hover:text-rose-800 transition-colors">{D.projects.flagship.title}</h3></Link>
                 <p className="text-slate-600 max-w-2xl mb-8 leading-relaxed">{D.projects.flagship.overview}</p>
 
                 {/* Architecture pillars */}
@@ -155,7 +156,7 @@ export default function HomePage() {
                   {D.projects.flagship.architecture.map(a => (
                     <div key={a.pillar} className="p-4 rounded-xl border border-slate-200 bg-slate-50">
                       <div className="flex items-center gap-2 mb-1.5">
-                        <CheckCircle2 size={14} className="text-indigo-600" />
+                        <CheckCircle2 size={14} className="text-rose-800" />
                         <div className="text-xs font-bold uppercase tracking-widest text-slate-900">{a.pillar}</div>
                       </div>
                       <div className="text-sm text-slate-600">{a.detail}</div>
@@ -166,8 +167,8 @@ export default function HomePage() {
                 {/* Metrics */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
                   {D.projects.flagship.metrics.map(m => (
-                    <div key={m.label} className="text-center p-4 rounded-xl bg-indigo-50/50 border border-indigo-100">
-                      <div className="text-2xl font-bold text-indigo-600">{m.value}</div>
+                    <div key={m.label} className="text-center p-4 rounded-xl bg-rose-50/50 border border-rose-100">
+                      <div className="text-2xl font-bold text-rose-800">{m.value}</div>
                       <div className="text-xs font-bold text-slate-900 mt-1 uppercase tracking-wide">{m.label}</div>
                       <div className="text-[10px] text-slate-500 mt-0.5">{m.detail}</div>
                     </div>
@@ -186,12 +187,12 @@ export default function HomePage() {
                 {/* Links */}
                 <div className="flex flex-wrap gap-3">
                   {D.projects.flagship.liveDemo && (
-                    <a href={D.projects.flagship.liveDemo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-indigo-700 shadow-sm transition-colors">
+                    <a href={D.projects.flagship.liveDemo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-rose-800 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-rose-700 shadow-sm transition-colors">
                       <ExternalLink size={16} /> Live Demo
                     </a>
                   )}
                   {D.projects.flagship.links.map(link => (
-                    <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-slate-200 bg-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-slate-50 text-slate-700 hover:text-indigo-600 shadow-sm transition-colors">
+                    <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-slate-200 bg-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-slate-50 text-slate-700 hover:text-rose-800 shadow-sm transition-colors">
                       <GithubIcon size={16} /> {link.name}
                     </a>
                   ))}
@@ -202,8 +203,8 @@ export default function HomePage() {
             {/* Secondary projects grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {D.projects.secondary.map(proj => (
-                <div key={proj.slug} className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col hover:shadow-md hover:border-slate-300 transition-all">
-                  <span className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">{proj.subtitle}</span>
+                <Link key={proj.slug} href={`/projects/${proj.slug}`} className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col hover:shadow-md hover:border-slate-300 transition-all cursor-pointer block">
+                  <span className="text-xs font-bold uppercase tracking-widest text-rose-800 mb-3">{proj.subtitle}</span>
                   <h3 className="text-lg font-bold mb-2 text-slate-900">{proj.title}</h3>
                   <p className="text-sm text-slate-600 mb-4 line-clamp-3 flex-1 leading-relaxed">{proj.overview}</p>
 
@@ -222,49 +223,11 @@ export default function HomePage() {
                   </div>
 
                   {'github' in proj && typeof proj.github === 'string' && (
-                    <a href={proj.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-700 mt-auto w-fit transition-colors">
+                    <a href={proj.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-rose-800 hover:text-rose-700 mt-auto w-fit transition-colors">
                       <GithubIcon size={16} /> View Source
                     </a>
                   )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════ #architecture — ADRs ════════════════════════════════════ */}
-        <section id="architecture" className="py-24 border-t border-slate-200 bg-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <SectionLabel label="Engineering Decisions" />
-            <h2 className="text-3xl font-bold mb-16 text-slate-900">Architecture Decision Records</h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {D.adrs.map(adr => (
-                <div key={adr.id} className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col hover:shadow-md transition-shadow">
-                  <div className="flex items-center gap-2 mb-5 pb-5 border-b border-slate-100">
-                    <span className="text-xs font-bold font-[family-name:var(--font-jetbrains)] text-cyan-600 bg-cyan-50 px-2 py-1 rounded-md border border-cyan-100">{adr.id}</span>
-                    <span className="ml-auto text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
-                      {adr.status}
-                    </span>
-                  </div>
-
-                  <h3 className="text-base font-bold mb-5 text-slate-900">{adr.title}</h3>
-
-                  <div className="space-y-4 text-sm text-slate-600 flex-1">
-                    <div>
-                      <span className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1 block">Context</span>
-                      <p className="leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">{adr.context}</p>
-                    </div>
-                    <div>
-                      <span className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1 block">Decision</span>
-                      <p className="leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">{adr.decision}</p>
-                    </div>
-                    <div>
-                      <span className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1 block">Consequence</span>
-                      <p className="leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">{adr.consequence}</p>
-                    </div>
-                  </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -282,7 +245,7 @@ export default function HomePage() {
                 return (
                   <div key={cat.title} className="p-8 rounded-2xl border border-slate-200 bg-white shadow-sm">
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100">
+                      <div className="w-12 h-12 rounded-xl bg-rose-50 text-rose-800 flex items-center justify-center border border-rose-100">
                         <Icon size={24} />
                       </div>
                       <div>
@@ -299,7 +262,7 @@ export default function HomePage() {
                         >
                           <span
                             className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                              skill.status === 'Proficient' ? 'bg-emerald-500' : 'bg-indigo-500'
+                              skill.status === 'Proficient' ? 'bg-emerald-500' : 'bg-rose-600'
                             }`}
                             aria-hidden="true"
                           />
@@ -318,7 +281,7 @@ export default function HomePage() {
                 <span className="w-2 h-2 rounded-full bg-emerald-500" /> Proficient
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-indigo-500" /> Experienced
+                <span className="w-2 h-2 rounded-full bg-rose-600" /> Experienced
               </div>
             </div>
           </div>
@@ -339,14 +302,14 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                   className="group p-5 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-slate-300 transition-all flex items-start gap-4"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-100">
+                  <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-800 flex items-center justify-center shrink-0 border border-rose-100">
                     <Award size={20} />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug mb-1">{cert.title}</h3>
+                    <h3 className="text-sm font-bold text-slate-900 group-hover:text-rose-800 transition-colors leading-snug mb-1">{cert.title}</h3>
                     <p className="text-xs font-medium text-slate-500">{cert.issuer} · {cert.date}</p>
                   </div>
-                  <ExternalLink size={14} className="text-slate-400 group-hover:text-indigo-600 shrink-0 mt-1 transition-colors" />
+                  <ExternalLink size={14} className="text-slate-400 group-hover:text-rose-800 shrink-0 mt-1 transition-colors" />
                 </a>
               ))}
             </div>
@@ -383,17 +346,17 @@ export default function HomePage() {
 
               <a
                 href={`mailto:${D.personal.email}`}
-                className="inline-flex items-center gap-3 bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-xl font-semibold text-base transition-colors active:scale-95 shadow-sm hover:shadow-md"
+                className="inline-flex items-center gap-3 bg-rose-800 hover:bg-rose-700 text-white px-8 py-4 rounded-xl font-semibold text-base transition-colors active:scale-95 shadow-sm hover:shadow-md"
               >
                 <Mail size={20} />
                 {D.personal.email}
               </a>
 
               <div className="flex items-center justify-center gap-4 mt-10">
-                <a href={D.personal.social.github} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-50 text-slate-700 hover:text-indigo-600 transition-colors" aria-label="GitHub">
+                <a href={D.personal.social.github} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-50 text-slate-700 hover:text-rose-800 transition-colors" aria-label="GitHub">
                   <GithubIcon size={20} />
                 </a>
-                <a href={D.personal.social.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-50 text-slate-700 hover:text-indigo-600 transition-colors" aria-label="LinkedIn">
+                <a href={D.personal.social.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-50 text-slate-700 hover:text-rose-800 transition-colors" aria-label="LinkedIn">
                   <LinkedinIcon size={20} />
                 </a>
               </div>
@@ -421,7 +384,7 @@ export default function HomePage() {
 /* ─── Reusable section label ────────────────────────────────────────────── */
 function SectionLabel({ label }: { label: string }) {
   return (
-    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm">
+    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-rose-200 bg-rose-50 text-rose-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm">
       <FileText size={14} />
       {label}
     </div>

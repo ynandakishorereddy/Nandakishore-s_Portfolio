@@ -67,6 +67,7 @@ export const PORTFOLIO_DATA = {
       category: "Capstone Project",
       period: "2025 – 2026",
       status: "Maintained" as const,
+      images: ["/projects/orcare-1.png", "/projects/orcare-2.png", "/projects/orcare-3.png"],
       overview:
         "A cross-platform oral health companion with native Android + React web client sharing one secure REST API backend, integrated with Gemini AI for contextual health guidance.",
       architecture: [
@@ -96,6 +97,7 @@ export const PORTFOLIO_DATA = {
         slug: "prepiq",
         title: "PrepIQ",
         subtitle: "AI Interview Platform",
+        images: ["/projects/prepiq-1.png", "/projects/prepiq-2.png", "/projects/prepiq-3.png"],
         overview: "Full-stack AI interview-prep SaaS built on Next.js 14 with Clerk auth and Prisma/PostgreSQL, evaluating answers via Gemini AI in real time.",
         tags: ["Next.js 14", "Prisma", "PostgreSQL", "Gemini AI", "Clerk Auth", "TypeScript"],
         github: "https://github.com/ynandakishorereddy/prepiq",
@@ -105,6 +107,7 @@ export const PORTFOLIO_DATA = {
         slug: "farm-management",
         title: "Farm Management System",
         subtitle: "ASP.NET Core Enterprise Application",
+        images: ["/projects/farm-1.png", "/projects/farm-2.png", "/projects/farm-3.png"],
         overview: "Enterprise-grade Farm Management system built with ASP.NET Core MVC at Cognizant, featuring crop tracking, inventory management, and field monitoring with 100% service-layer test coverage.",
         tags: ["ASP.NET Core MVC", "EF Core", "SQL Server", "NUnit/Moq", "Docker", "Azure", "GitHub Actions"],
         highlight: "100% service-layer test coverage",
@@ -113,6 +116,7 @@ export const PORTFOLIO_DATA = {
         slug: "retailiq",
         title: "RetailIQ",
         subtitle: "AI-Powered Analytics Dashboard",
+        images: ["/projects/retail-1.png", "/projects/retail-2.png", "/projects/retail-3.png"],
         overview: "AI-powered retail analytics dashboard that surfaces inventory forecasts and sales trends from SQL Server data, built during the Cognizant internship.",
         tags: ["ASP.NET Core", "SQL Server", "AI/ML", "EF Core", "Azure"],
         highlight: "Real-time inventory forecasting",

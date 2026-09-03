@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowLeft, ExternalLink, CheckCircle2 } from 'lucide-react';
 import { PORTFOLIO_DATA, getAllProjects } from '@/lib/portfolio-data';
 import { GithubIcon } from '@/components/ui/icons';
+import { ProjectSlideshow } from '@/components/project-slideshow';
 
 // Generate static params for all projects
 export function generateStaticParams() {
@@ -12,8 +13,8 @@ export function generateStaticParams() {
   }));
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const projects = getAllProjects();
   const project = projects.find((p) => p.slug === slug);
 
@@ -25,6 +26,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const category = 'category' in project ? project.category : 'Project';
   const subtitle = 'subtitle' in project ? project.subtitle : '';
   const liveDemo = 'liveDemo' in project ? project.liveDemo : undefined;
+  const images = 'images' in project && Array.isArray(project.images) ? project.images : [];
   
   // Extract links
   let links: {name: string, url: string}[] = [];
@@ -95,13 +97,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </header>
 
         {/* Media Showcase */}
-        <div className="mb-20 rounded-2xl overflow-hidden border border-slate-200 shadow-lg bg-slate-900 aspect-video relative flex items-center justify-center">
-          <div className="text-slate-500 flex flex-col items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
-              <span className="text-slate-400">Media</span>
-            </div>
-            <p className="text-sm font-medium">Showcase preview for {project.title}</p>
-          </div>
+        <div className="mb-20">
+          <ProjectSlideshow images={images} title={project.title} />
         </div>
 
         {/* In-depth Sections */}
@@ -111,7 +108,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <section>
               <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
                 <span className="w-8 h-8 rounded-lg bg-rose-100 text-rose-800 flex items-center justify-center text-sm">1</span>
-                Problem &amp; Solution
+                Project Summary
               </h2>
               <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed">
                 <p>
@@ -126,7 +123,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <section>
               <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
                 <span className="w-8 h-8 rounded-lg bg-rose-100 text-rose-800 flex items-center justify-center text-sm">2</span>
-                Tech Stack Rationale
+                Key Architecture Pillars
               </h2>
               <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed">
                 <p>
@@ -143,7 +140,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <section>
               <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
                 <span className="w-8 h-8 rounded-lg bg-rose-100 text-rose-800 flex items-center justify-center text-sm">3</span>
-                Core Engineering Challenges
+                Engineering Challenges
               </h2>
               <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed">
                 <p>
@@ -159,7 +156,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           {/* Sidebar */}
           <div className="space-y-10">
             <section className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-              <h3 className="text-lg font-bold text-slate-900 mb-4">Measurable Impact</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-4">Measurable Benchmarks</h3>
               <ul className="space-y-4">
                 {'highlight' in project && (
                   <li className="flex items-start gap-3">

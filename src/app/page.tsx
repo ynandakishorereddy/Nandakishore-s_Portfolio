@@ -20,7 +20,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/icons';
-import { PORTFOLIO_DATA } from '@/lib/portfolio-data';
+import { PORTFOLIO_DATA, getAllProjects } from '@/lib/portfolio-data';
 import { Navbar } from '@/components/navbar';
 import { TerminalWidget } from '@/components/terminal-widget';
 
@@ -133,102 +133,65 @@ export default function HomePage() {
             <SectionLabel label="Featured Work" />
             <h2 className="text-3xl font-bold mb-16 text-slate-900">Projects</h2>
 
-            {/* Flagship — ORCare */}
-            <div className="mb-12 p-8 sm:p-10 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-rose-50 to-transparent rounded-bl-full -z-0" />
-
-              <div className="relative z-10">
-                <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className="text-xs font-bold uppercase tracking-widest text-rose-800">
-                    Flagship · {D.projects.flagship.category}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse-dot" />
-                    {D.projects.flagship.status}
-                  </span>
-                </div>
-
-                <Link href={`/projects/${D.projects.flagship.slug}`}><h3 className="text-2xl sm:text-3xl font-bold mb-2 text-slate-900 hover:text-rose-800 transition-colors">{D.projects.flagship.title}</h3></Link>
-                <p className="text-slate-600 max-w-2xl mb-8 leading-relaxed">{D.projects.flagship.overview}</p>
-
-                {/* Architecture pillars */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                  {D.projects.flagship.architecture.map(a => (
-                    <div key={a.pillar} className="p-4 rounded-xl border border-slate-200 bg-slate-50">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <CheckCircle2 size={14} className="text-rose-800" />
-                        <div className="text-xs font-bold uppercase tracking-widest text-slate-900">{a.pillar}</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+              {getAllProjects().map(proj => {
+                const category = 'category' in proj ? proj.category : proj.subtitle;
+                const highlight = 'highlight' in proj ? proj.highlight : null;
+                const firstImage = ('images' in proj && Array.isArray(proj.images)) ? proj.images[0] : '';
+                
+                return (
+                  <div key={proj.slug} className="group relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:border-rose-300 flex flex-col justify-between cursor-pointer">
+                    <Link href={`/projects/${proj.slug}`} className="block mb-4">
+                      {/* 16:9 Image Preview */}
+                      <div className="w-full aspect-video rounded-xl bg-slate-100 overflow-hidden mb-5 relative border border-slate-200/60">
+                        {firstImage ? (
+                          <img src={firstImage} alt={proj.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-slate-400">Preview</div>
+                        )}
                       </div>
-                      <div className="text-sm text-slate-600">{a.detail}</div>
+                      
+                      <span className="text-xs font-bold uppercase tracking-widest text-rose-800 mb-2 block">{category}</span>
+                      <h3 className="text-2xl font-bold mb-2 text-slate-900 group-hover:text-rose-800 transition-colors">{proj.title}</h3>
+                      <p className="text-slate-600 mb-4 line-clamp-3 leading-relaxed">{proj.overview}</p>
+
+                      {highlight && (
+                        <div className="text-xs font-semibold text-emerald-700 mb-4 flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1.5 rounded-md border border-emerald-100 w-fit">
+                          <CheckCircle2 size={14} />
+                          {highlight}
+                        </div>
+                      )}
+                    </Link>
+
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {proj.tags.slice(0, 4).map(tag => (
+                        <span key={tag} className="text-[10px] px-2.5 py-1 rounded-md border border-slate-200 bg-slate-50 text-slate-600 font-medium">
+                          {tag}
+                        </span>
+                      ))}
+                      {proj.tags.length > 4 && (
+                        <span className="text-[10px] px-2.5 py-1 rounded-md border border-slate-200 bg-slate-50 text-slate-600 font-medium">
+                          +{proj.tags.length - 4}
+                        </span>
+                      )}
                     </div>
-                  ))}
-                </div>
 
-                {/* Metrics */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-                  {D.projects.flagship.metrics.map(m => (
-                    <div key={m.label} className="text-center p-4 rounded-xl bg-rose-50/50 border border-rose-100">
-                      <div className="text-2xl font-bold text-rose-800">{m.value}</div>
-                      <div className="text-xs font-bold text-slate-900 mt-1 uppercase tracking-wide">{m.label}</div>
-                      <div className="text-[10px] text-slate-500 mt-0.5">{m.detail}</div>
+                    <div className="flex items-center gap-4 mt-auto border-t border-slate-100 pt-4">
+                      {'liveDemo' in proj && typeof proj.liveDemo === 'string' && (
+                        <a href={proj.liveDemo} onClick={(e) => e.stopPropagation()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-rose-800 hover:text-rose-700 transition-colors">
+                          <ExternalLink size={16} /> Live Demo
+                        </a>
+                      )}
+                      
+                      {'github' in proj && typeof proj.github === 'string' && (
+                        <a href={proj.github} onClick={(e) => e.stopPropagation()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-rose-800 transition-colors">
+                          <GithubIcon size={16} /> Source
+                        </a>
+                      )}
                     </div>
-                  ))}
-                </div>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {D.projects.flagship.tags.map(tag => (
-                    <span key={tag} className="text-xs px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-100 font-medium text-slate-700">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Links */}
-                <div className="flex flex-wrap gap-3">
-                  {D.projects.flagship.liveDemo && (
-                    <a href={D.projects.flagship.liveDemo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-rose-800 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-rose-700 shadow-sm transition-colors">
-                      <ExternalLink size={16} /> Live Demo
-                    </a>
-                  )}
-                  {D.projects.flagship.links.map(link => (
-                    <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-slate-200 bg-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-slate-50 text-slate-700 hover:text-rose-800 shadow-sm transition-colors">
-                      <GithubIcon size={16} /> {link.name}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Secondary projects grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {D.projects.secondary.map(proj => (
-                <Link key={proj.slug} href={`/projects/${proj.slug}`} className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col hover:shadow-md hover:border-slate-300 transition-all cursor-pointer block">
-                  <span className="text-xs font-bold uppercase tracking-widest text-rose-800 mb-3">{proj.subtitle}</span>
-                  <h3 className="text-lg font-bold mb-2 text-slate-900">{proj.title}</h3>
-                  <p className="text-sm text-slate-600 mb-4 line-clamp-3 flex-1 leading-relaxed">{proj.overview}</p>
-
-                  <div className="text-xs font-semibold text-emerald-700 mb-4 flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1.5 rounded-md border border-emerald-100 w-fit">
-                    <CheckCircle2 size={14} />
-                    {proj.highlight}
                   </div>
-
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {proj.tags.slice(0, 4).map(tag => (
-                      <span key={tag} className="text-[10px] px-2 py-1 rounded-md border border-slate-200/80 bg-slate-50 text-slate-600 font-medium">{tag}</span>
-                    ))}
-                    {proj.tags.length > 4 && (
-                      <span className="text-[10px] px-2 py-1 rounded-md border border-slate-200/80 bg-slate-50 text-slate-600 font-medium">+{proj.tags.length - 4}</span>
-                    )}
-                  </div>
-
-                  {'github' in proj && typeof proj.github === 'string' && (
-                    <a href={proj.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-rose-800 hover:text-rose-700 mt-auto w-fit transition-colors">
-                      <GithubIcon size={16} /> View Source
-                    </a>
-                  )}
-                </Link>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>

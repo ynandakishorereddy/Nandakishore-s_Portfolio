@@ -144,24 +144,14 @@ export default function HomePage() {
                     <Link href={`/projects/${proj.slug}`} className="block mb-4">
                       {/* 16:9 Image Preview */}
                       <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-200 bg-slate-100 mb-5 group-hover:border-rose-200 transition-colors">
-                        {(('thumbnail' in proj && typeof proj.thumbnail === 'string' && proj.thumbnail) || (proj as any).images?.[0]) ? (
-                          <Image
-                            alt={`${proj.title} Preview`}
-                            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                            fill
-                            priority
-                            src={('thumbnail' in proj && typeof proj.thumbnail === 'string' && proj.thumbnail) ? proj.thumbnail : (proj as any).images[0]}
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                          />
-                        ) : (
-                          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center transition-transform duration-500 group-hover:scale-105">
-                            <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mb-4 text-slate-400">
-                              <CheckCircle2 size={24} />
-                            </div>
-                            <span className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">{category}</span>
-                            <h4 className="text-lg font-bold text-slate-700">{proj.title}</h4>
-                          </div>
-                        )}
+                        <Image
+                          alt={`${proj.title} Preview`}
+                          className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                          fill
+                          priority
+                          src={(proj as any).thumbnail}
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
                       </div>
                       
                       <span className="text-xs font-bold uppercase tracking-widest text-rose-800 mb-2 block">{category}</span>

@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowLeft, ExternalLink, CheckCircle2 } from 'lucide-react';
 import { PORTFOLIO_DATA, getAllProjects } from '@/lib/portfolio-data';
 import { GithubIcon } from '@/components/ui/icons';
-import { ProjectSlideshow } from '@/components/project-slideshow';
 
 // Generate static params for all projects
 export function generateStaticParams() {
@@ -26,9 +26,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const category = 'category' in project ? project.category : 'Project';
   const subtitle = 'subtitle' in project ? project.subtitle : '';
   const liveDemo = 'liveDemo' in project ? project.liveDemo : undefined;
-  const images = 'images' in project && Array.isArray(project.images) ? project.images : [];
-  const captions = 'captions' in project && Array.isArray(project.captions) ? project.captions : undefined;
-  
+    
   // Extract links
   let links: {name: string, url: string}[] = [];
   if ('links' in project && Array.isArray(project.links)) {
@@ -98,8 +96,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </header>
 
         {/* Media Showcase */}
-        <div className="mb-20">
-          <ProjectSlideshow images={images} title={project.title} captions={captions} category={category} />
+        <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-md mb-20">
+          <Image alt={`${project.title} Preview`} className="object-cover object-top" fill priority src={(project as any).thumbnail} />
         </div>
 
         {/* In-depth Sections */}
